@@ -25,7 +25,7 @@ public class ParanthesesBalanceTest {
             System.out.println("For\t" + lines[i]);
             System.out.println("Test,\tFact");
             System.out.println(parenthesesBalance.isBalanced(lines[i]) + ",\t" + isBalanced[i]);
-            System.out.println("");
+            System.out.println(""); //
         }
     }
 }
