@@ -7,24 +7,28 @@ import parentheses.parenthesesBalance;
 public class ParanthesesBalanceTest {
 
     public static void main(String[] args) throws StackIsEmptyException {
-        String[] lines = new String[12];
-        boolean[] isBalanced = new boolean[12];
-        lines[0] = "([](){([])})";      isBalanced[0] = true;
-        lines[1] = "()[]}";             isBalanced[1] = false;
-        lines[2] = "{{[()]]";           isBalanced[2] = false;
-        lines[3] = "[]";                isBalanced[3] = true;
-        lines[4] = "[]{}";              isBalanced[4] = true;
-        lines[5] = "[()]";              isBalanced[5] = true;
-        lines[6] = "(())";              isBalanced[6] = true;
-        lines[7] = "{[]}()";            isBalanced[7] = true;
-        lines[8] = "{";                 isBalanced[8] = false;
-        lines[9] = "{[}";               isBalanced[9] = false;
-        lines[10] = "foo(bar);";        isBalanced[10] = true;
-        lines[11] = "foo(bar[i);";      isBalanced[11] = false;
+        String[] lines = new String[13];
+        int[] indexes = new int[13];
+        lines[0] = "([](){([])})";      indexes[0] = 0;
+        lines[1] = "()[]}";             indexes[1] = 5;
+        lines[2] = "{{[()]]";           indexes[2] = 7;
+        lines[3] = "{{{[][][]";         indexes[3] = 3;
+        lines[4] = "{*{{}";             indexes[4] = 3;
+        lines[5] = "[[*";               indexes[5] = 2;
+        lines[6] = "{*}";               indexes[6] = 0;
+        lines[7] = "{{";                indexes[7] = 2;
+        lines[8] = "{}";                indexes[8] = 0;
+        lines[9] = "";                  indexes[9] = 0;
+        lines[10] = "}";                indexes[10] = 1;
+        lines[11] = "*{}";              indexes[11] = 0;
+        lines[12] = "{{{**[][][]";      indexes[12] = 3;
         for (int i = 0; i < lines.length; i++) {
             System.out.println("For\t" + lines[i]);
-            System.out.println("Test,\tFact");
-            System.out.println(parenthesesBalance.isBalanced(lines[i]) + ",\t" + isBalanced[i]);
+            int index = parenthesesBalance.isBalanced(lines[i]);
+            if(index == indexes[i]) 
+                System.out.println("OK");
+            else
+                System.out.println("Result " + index + " is not " + indexes[i]);
             System.out.println(""); //
         }
     }
